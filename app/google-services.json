@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "500235451323",
+    "firebase_url": "https://overseafcm.firebaseio.com",
+    "project_id": "overseafcm",
+    "storage_bucket": "overseafcm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500235451323:android:0335dad642772067",
+        "android_client_info": {
+          "package_name": "com.victor.oversea"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "500235451323-lsvduv8du6s5klsviv3p754feh49e16j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjDloNfRHr5Gu2MPQSblCmJGIBNYl9lkM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

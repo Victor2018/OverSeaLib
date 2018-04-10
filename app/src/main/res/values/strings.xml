@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">OverSeaLib</string>
+
+    <!--fcm-->
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="default_notification_channel_name" translatable="true">News</string>
+    <string name="quickstart_message">Click the SUBSCRIBE TO NEWS button below to subscribe to the
+        news topic. Messages sent to the news topic will be received. The LOG TOKEN button logs the
+        InstanceID token to logcat.</string>
+    <string name="msg_subscribed">Subscribed to news topic</string>
+    <string name="log_token">Log Token</string>
+    <string name="show_token">Show Token</string>
+    <string name="google_pay">GooglePayBilling</string>
+    <string name="notify_share_cancel">分享取消～</string>
+    <string name="notify_share_failed">分享失败~</string>
+
+    <string name="user_cancelled_operation">用户取消操作</string>
+    <string name="phone_login_canceled">手机号码登陆取消</string>
+    <string name="log_in_with">Log In With</string>
+    <string name="share_with">Share With</string>
+
+    <!--facebook-->
+    <string name="facebook_app_id">1360086164086800</string>
+    <string name="ak_login_protocol_scheme">ak1360086164086800</string>
+    <string name="fb_login_protocol_scheme">fb1360086164086800</string>
+    <string name="ACCOUNT_KIT_CLIENT_TOKEN">826f1c2d2325a7fb691b85aa9a6ff963</string>
+</resources>

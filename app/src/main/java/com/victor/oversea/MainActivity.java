@@ -5,13 +5,11 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Build;
-import android.os.TestLooperManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.accountkit.AccountKitLoginResult;
@@ -20,21 +18,27 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import com.victor.data.ShareInfo;
 import com.victor.facebook.AccountKitHelper;
 import com.victor.facebook.FacebookHelper;
 import com.victor.facebook.share.FacebookShareModule;
 import com.victor.facebook.share.IShareListener;
+import com.victor.twitter.TwitterHelper;
 import com.victor.util.ToastUtils;
 
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
-        FacebookHelper.FacebookListener,AccountKitHelper.AccountKitListener,IShareListener {
+        FacebookHelper.FacebookListener,AccountKitHelper.AccountKitListener,IShareListener,
+        TwitterHelper.OnTwitterLoginListener {
     private String TAG = "MainActivity";
     private Button mBtnSubscribe,mBtnLogToken,mBtnGooglePay,mBtnFackbookLog,
-            mBtnPhoneLog,mBtnFacebookShare;
+            mBtnPhoneLog,mBtnFacebookShare,mBtnTwitterShare;
+    private TwitterLoginButton mBtnTwitterLog;
 
     private FacebookHelper mFacebookHelper;
     private AccountKitHelper mAccountKitHelper;
+    private TwitterHelper mTwitterHelper;
     private FacebookShareModule facebookShareModule;
 
     @Override
@@ -61,7 +65,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnGooglePay = (Button)findViewById(R.id.btn_google_pay);
         mBtnFackbookLog = (Button)findViewById(R.id.btn_facebook_log);
         mBtnPhoneLog = (Button)findViewById(R.id.btn_phone_log);
+        mBtnTwitterLog = (TwitterLoginButton) findViewById(R.id.btn_twitter_log);
         mBtnFacebookShare = (Button)findViewById(R.id.btn_facebook_share);
+        mBtnTwitterShare = (Button)findViewById(R.id.btn_twitter_share);
 
         mBtnSubscribe.setOnClickListener(this);
         mBtnLogToken.setOnClickListener(this);
@@ -69,13 +75,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnFackbookLog.setOnClickListener(this);
         mBtnPhoneLog.setOnClickListener(this);
         mBtnFacebookShare.setOnClickListener(this);
+        mBtnTwitterShare.setOnClickListener(this);
 
         initFacebookAndAccouontKit();
+
     }
 
     private void initFacebookAndAccouontKit () {
         mFacebookHelper = new FacebookHelper(this);
         mAccountKitHelper = new AccountKitHelper(this);
+        mTwitterHelper = new TwitterHelper(mBtnTwitterLog,this);
         facebookShareModule = new FacebookShareModule(this);
     }
 
@@ -141,6 +150,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 info.summary = "this is come from facebook share";
                 facebookShareModule.share(info);
                 break;
+            case R.id.btn_twitter_share:
+                mTwitterHelper.share(this);
+                break;
         }
     }
 
@@ -150,6 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mFacebookHelper.onActivityResult(requestCode, resultCode, data);
         mAccountKitHelper.onActivityResult(requestCode, resultCode, data);
         facebookShareModule.onActivityResult(requestCode,resultCode,data);
+        mBtnTwitterLog.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -162,6 +175,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (mAccountKitHelper != null) {
             mAccountKitHelper.onDestory();
             mAccountKitHelper = null;
+        }
+        if (mTwitterHelper != null) {
+            mTwitterHelper.onDestory();
+            mTwitterHelper = null;
         }
     }
 
@@ -210,5 +227,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onShareError(int shareType, String error) {
         ToastUtils.showShort("onShareError fail error = " + error);
+    }
+
+    @Override
+    public void OnTwitterLogin(boolean twitterLoginSuccess, String error) {
+        ToastUtils.showShort(error);
     }
 }

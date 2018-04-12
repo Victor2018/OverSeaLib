@@ -71,6 +71,12 @@
             android:layout_height="@dimen/dp_120"
             android:layout_marginLeft="@dimen/dp_60"
             android:background="@mipmap/ic_login_phone"/>
+
+        <com.twitter.sdk.android.core.identity.TwitterLoginButton
+            android:id="@+id/btn_twitter_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
     <TextView
@@ -91,6 +97,12 @@
             android:layout_width="@dimen/dp_120"
             android:layout_height="@dimen/dp_120"
             android:background="@mipmap/ic_invitation_facebook"/>
+        <Button
+            android:id="@+id/btn_twitter_share"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="@dimen/dp_120"
+            android:layout_marginLeft="@dimen/dp_60"
+            android:background="@mipmap/ic_invitation__twitter"/>
     </LinearLayout>
 
 
